@@ -1,0 +1,197 @@
+name: LHDI Platform Onboarding Request Form
+description: Self-service request to onboard application repository(s), provision LHDI Platform resources and grant access to tools 
+labels: [ lhdi-onboard ]
+title: Onboarding Request for <replace with your GitHub Team Name>
+body:
+  - type: markdown
+    attributes:
+      value: |
+        <h3 style="display:inline-block;">🚨 READ BEFORE PROCEEDING 🚨</h3>  
+
+        **NOTE:** Before submitting this GitHub issue form, please confirm that you meet all prerequisites outlined in our [Onboarding to DI](https://department-of-veterans-affairs.github.io/delivery-platform-docs/Getting-access/Onboarding-to-DI/#step-1-prerequisites-for-onboarding-and-provisioning-lhdi-resources) documentation.
+        
+        **NOTE:** If your GitHub repository(s) visibility is set to `public`, you must leverage GitHub [repository mirroring feature](https://docs.github.com/en/repositories/creating-and-managing-repositories/duplicating-a-repository#mirroring-a-repository-in-another-location), to create and onboard a copy of your repository, and set the visibility to `internal` within the `department-of-veterans-affairs` GitHub organization. To protect the confidentiality and integrity of our SecRel pipeline, we cannot allow public repos to call SecRel at this time.
+
+        ---
+
+  - type: input
+    id: product-name
+    attributes:
+      label: System Name
+      description: Limited to alphanumeric, -, (), and space characters, this field is used to group your repository(s), depending on how many repos make up your holistic product (one-to-one or one-to-many). This name should match what is in eMASS for your registered Systen Name. If you have not registered your system in eMASS, you can do so later, before shipping to production.
+      placeholder: MedPic Visualizer
+    validations:
+      required: true
+
+  - type: textarea
+    id: product-description
+    attributes:
+      label: System Description
+      description: Please be as descriptive as possible about what your System does or will do. Examples are also extremely helpful. This is used to provide Application Assessors and Privacy Officers with context that will help them better support your team.
+      placeholder: MedPic Visualizer is a framework for rapid integration and evaluation of novel sources and use cases for patient-generated data (PGD). The DHP manages the import and storage of third-party PGD from vendors such as Fitbit, manufacturers of other wearables, and other connected medical devices, and surfaces that data for use in clinical dashboards, population-scale research, etc.
+    validations:
+      required: true
+  
+  - type: input
+    id: team-slack-channel
+    attributes:
+      label: Your Team Slack Channel
+      description: Provide a public Slack channel name (***OMIT \# characters***). This is leveraged to notify your team of onboarding request progress, and ongoing policy monitoring feedback. Teams typically leverage the following convention for public slack channels `team-<teamName>-alerts` or `team-<teamName>` within [lighthouseva.slack.com](https://lighthouseva.slack.com) 
+      placeholder: "team-lasershark-alerts or team-lasershark"
+    validations:
+      required: true
+
+  - type: input
+    id: va-email-address
+    attributes:
+      label: Your VA Email Address
+      description: This user will be granted permissions to manage teammate access to your projects data within our security tools, and is required for SSO authentication. 
+      placeholder: firstname.lastname@va.gov
+    validations:
+      required: true
+
+  - type: input
+    id: github-team-name
+    attributes:
+      label: GitHub Team Name
+      description: "[VA GitHub team name](https://github.com/orgs/department-of-veterans-affairs/teams) will be used as a naming convention for [Kubernetes namespaces on LHDI](https://department-of-veterans-affairs.github.io/delivery-platform-docs/Lighthouse-delivery-infrastructure-tools/Using-the-DI-tools/Step-1-Getting-to-know-your-environments/Kubernetes), and provides continuity across all tools, SSO authentication, and segmentation of your team’s data."
+      placeholder: lighthouse-lasershark
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+
+        ### Configure application repository(s) for SecRel Pipeline scans
+
+        :heavy_exclamation_mark:You **do not** need to include deployment repositories here :heavy_exclamation_mark:  
+        
+        **NOTE:** If your system-to-application repository ratio is:  
+        
+        **One-to-One:** Ignore the additional GitHub repository fields provided below.  
+            
+        **One-to-Many:** Leverage the additional Github repository fields below, and onboard all repositories using a single request form. If you need to onboard additional repositories in the future, you can either edit this GitHub issue, or submit a new one using the same System Name, matching your original onboarding request.
+
+  - type: input
+    id: github-repo-name
+    attributes:
+      label: "GitHub Repository Name"
+      description: The GitHub repository to onboard. Example - if you are onboarding a project called department-of-veterans-affairs / lighthouse-medication-visualizer, you only need to provide that actual project name `lighthouse-medication-visualizer` and not the organization.
+      placeholder: lighthouse-medication-visualizer
+    validations:
+      required: true
+
+  - type: input
+    id: github-repo-default-branch
+    attributes:
+      label: "GitHub Repository Default Branch"
+      description: Provide the trunk branch that the SecRel pipeline will branch off of
+      placeholder: main
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        <h3 style="display:inline-block;">🚨 ONLY COMPLETE THE FOLLOWING IF YOUR SYSTEM CONSISTS OF MULTIPLE APPLICATION REPOSITORIES 🚨</h3> 
+
+        ---
+      
+        ### 2nd Repository      
+
+  - type: input
+    id: second-github-repo-name
+    attributes:
+      label: "Second GitHub Repository Name"
+      description: The GitHub repository to onboard. Example - if you are onboarding a project called department-of-veterans-affairs / lighthouse-medication-visualizer, you only need to provide that actual project name `lighthouse-medication-visualizer` and not the organization.
+      placeholder: lighthouse-medication-visualizer
+    validations:
+      required: false
+
+  - type: input
+    id: second-github-repo-default-branch
+    attributes:
+      label: "Second GitHub Repository Default Branch"
+      description: Provide the trunk branch that the SecRel pipeline will branch off of
+      placeholder: main
+    validations:
+      required: false
+  
+  - type: markdown
+    attributes:
+      value: |
+        ---
+      
+        ### 3rd Repository
+
+  - type: input
+    id: third-github-repo-name
+    attributes:
+      label: "Third GitHub Repository Name"
+      description: The GitHub repository to onboard. Example - if you are onboarding a project called department-of-veterans-affairs / lighthouse-medication-visualizer, you only need to provide that actual project name `lighthouse-medication-visualizer` and not the organization.
+      placeholder: lighthouse-medication-visualizer
+    validations:
+      required: false
+  
+  - type: input
+    id: third-github-repo-default-branch
+    attributes:
+      label: "Third GitHub Repository Default Branch"
+      description: Provide the trunk branch that the SecRel pipeline will branch off of
+      placeholder: main
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+      
+        ### 4th Repository
+
+  - type: input
+    id: fourth-github-repo-name
+    attributes:
+      label: "Fourth GitHub Repository Name"
+      description: The GitHub repository to onboard. Example - if you are onboarding a project called department-of-veterans-affairs / lighthouse-medication-visualizer, you only need to provide that actual project name `lighthouse-medication-visualizer` and not the organization.
+      placeholder: lighthouse-medication-visualizer
+    validations:
+      required: false
+  
+  - type: input
+    id: fourth-github-repo-default-branch
+    attributes:
+      label: "Fourth GitHub Repository Default Branch"
+      description: Provide the trunk branch that the SecRel pipeline will branch off of
+      placeholder: main
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+      
+        ### 5th Repository
+
+  - type: input
+    id: fifth-github-repo-name
+    attributes:
+      label: "Fifth GitHub Repository Name"
+      description: The GitHub repository to onboard. Example - if you are onboarding a project called department-of-veterans-affairs / lighthouse-medication-visualizer, you only need to provide that actual project name `lighthouse-medication-visualizer` and not the organization.
+      placeholder: lighthouse-medication-visualizer
+    validations:
+      required: false
+  
+  - type: input
+    id: fifth-github-repo-default-branch
+    attributes:
+      label: "Fifth GitHub Repository Default Branch"
+      description: Provide the trunk branch that the SecRel pipeline will branch off of
+      placeholder: main
+    validations:
+      required: false
